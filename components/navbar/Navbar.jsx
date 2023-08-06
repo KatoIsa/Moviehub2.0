@@ -19,6 +19,9 @@ const Navbar = () => {
       </Link>
       <ul style={{ left: `${open ? "0" : "-100vw"}` }}>
         <Link href={"/"}>
+          <li>Home</li>
+        </Link>
+        <Link href={"/"}>
           <li>Movies</li>
         </Link>
         <Link href={"/"}>
