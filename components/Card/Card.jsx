@@ -11,8 +11,8 @@ const Card = ({ item, type }) => {
           <Image
             src={`https://www.themoviedb.org/t/p/w220_and_h330_face${item.poster_path}`}
             alt="img"
-            width={150}
-            height={200}
+            width={1000}
+            height={1000}
           />
         </div>
         <div
