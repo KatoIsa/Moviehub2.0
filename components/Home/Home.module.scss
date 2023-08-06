@@ -1,0 +1,54 @@
+.container {
+  margin-top: 50px;
+  .div {
+    width: 100vw;
+    margin: 0 auto;
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 500;
+      margin-left: 40px;
+    }
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-left: 40px;
+      margin-top: 50px;
+    }
+    .movies,
+    .tv {
+      background-image: url("https://www.themoviedb.org/assets/2/v4/misc/trending-bg-39afc2a5f77e31d469b25c187814c0a2efef225494c038098d62317d923f8415.svg");
+      background-position: bottom;
+      background-size: auto;
+      background-repeat: no-repeat;
+      display: flex;
+      margin-bottom: 100px;
+      overflow-x: auto;
+      padding: 10px 40px 30px 40px;
+      &::-webkit-scrollbar {
+        height: 10px;
+        background-color: #fff;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(var(--lightGrey));
+        border-radius: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    .div {
+      h1 {
+        margin-left: 10px;
+      }
+      h2 {
+        margin-left: 10px;
+      }
+      .movies,
+      .tv {
+        padding: 10px 20px 30px 0;
+      }
+    }
+  }
+}

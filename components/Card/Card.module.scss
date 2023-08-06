@@ -1,0 +1,33 @@
+.container {
+  width: 150px;
+  margin-left: 20px;
+  flex: 0 0 auto;
+  position: relative;
+  .progress {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 2px solid rgba(var(--DarkBlue));
+    border-radius: 50%;
+    color: #fff;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  h4 {
+    font-size: 0.9rem;
+  }
+  .image {
+    width: 100%;
+    height: 230px;
+    margin-bottom: 20px;
+    img {
+      width: 100%;
+      border-radius: 10px;
+      height: 100%;
+    }
+  }
+}
