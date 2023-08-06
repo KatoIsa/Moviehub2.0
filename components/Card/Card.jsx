@@ -18,7 +18,7 @@ const Card = ({ item, type }) => {
         <div
           className={styles.progress}
           style={{
-            background: `radial-gradient(closest-side, rgba(var(--DarkBlue)) 90%, transparent 95% 100%),conic-gradient(${
+            background: `radial-gradient(closest-side, rgba(0,0,0) 78%, transparent 95% 100%),conic-gradient(${
               rating >= 70
                 ? "rgba( 1, 210, 119)"
                 : rating >= 50
