@@ -13,6 +13,10 @@
       font-weight: 400;
       margin-left: 40px;
       margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 95%;
     }
     .movies,
     .tv {
