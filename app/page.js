@@ -50,7 +50,12 @@ export default function Home() {
   return (
     <main className={styles.main}>
       {open && (
-        <Iframe movieid={movieid} handleclose={handleclose} open={open} />
+        <Iframe
+          movieid={movieid}
+          handleclose={handleclose}
+          open={open}
+          type={"movie"}
+        />
       )}
       <Hero />
       <Homepage title={"Trending"} movies={movies} tv={tv} />
