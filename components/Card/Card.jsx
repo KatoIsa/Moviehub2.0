@@ -5,7 +5,10 @@ import Link from "next/link";
 const Card = ({ item, type }) => {
   const rating = (item.vote_average.toFixed(1) / 10) * 100;
   return (
-    <Link className={styles.container} href={"/"}>
+    <Link
+      className={styles.container}
+      href={type == "movie" ? `/movies/${item.id}` : `/tvshows/${item.id}`}
+    >
       <div className={styles.image}>
         <Image
           src={`https://www.themoviedb.org/t/p/w220_and_h330_face${item.poster_path}`}
