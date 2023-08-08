@@ -11,12 +11,8 @@ const Iframe = ({ open, movieid, handleclose, type }) => {
       `https://api.themoviedb.org/3/${type}/${movieid}/videos?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&page=1`
     );
     setTrailers(data.results);
-    console.log(trailers);
   };
   const trailer = trailers.filter((item) => item.type == "Trailer")[0];
-  console.log("====================================");
-  console.log(trailer);
-  console.log("====================================");
   useEffect(() => {
     fetchTrailer();
   }, [movieid]);
@@ -30,7 +26,6 @@ const Iframe = ({ open, movieid, handleclose, type }) => {
         title="trailer player"
         allowFullScreen
       />
-      {/* <div className={styles.iframe}></div> */}
       <div className={styles.svg} onClick={handleclose}>
         <AiOutlineClose />
       </div>
