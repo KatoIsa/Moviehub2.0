@@ -7,7 +7,13 @@ const Footer = () => {
       <h1>
         MovieHub <div></div>
       </h1>
-      <p>&copy; 2023 All rights reserved.</p>
+      <p>
+        2023. All data and media from{" "}
+        <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer">
+          TMDB
+        </a>
+        .
+      </p>
       <p>
         Made with <AiOutlineHeart /> by{" "}
         <a
@@ -15,8 +21,9 @@ const Footer = () => {
           target="_blank"
           rel="noreferrer"
         >
-          Taleem.
+          Taleem
         </a>
+        .
       </p>
     </footer>
   );
