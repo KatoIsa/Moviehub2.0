@@ -4,26 +4,14 @@ import styles from "./LatestTrailers.module.scss";
 import Image from "next/image";
 import { FaPlay } from "react-icons/fa";
 import axios from "axios";
-import Iframe from "../Iframe/Iframe";
 
-const LatestTrailers = ({ open, handleopen, movieid, setmovieid }) => {
+const LatestTrailers = ({ handleopen }) => {
   const [movies, setmovies] = useState([]);
-  const [movies2, setmovies2] = useState([]);
   const fetchUpcomming = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/movie/upcoming?language=en-US&api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&page=1`
     );
     setmovies(data.results);
-    movies.map((movie) => {
-      setmovies2((curr) => [
-        ...curr,
-        {
-          name: movie.title,
-          id: movie.id,
-          backdropPath: movie.backdrop_path,
-        },
-      ]);
-    });
   };
   useEffect(() => {
     fetchUpcomming();
