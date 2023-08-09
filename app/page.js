@@ -57,7 +57,7 @@ export default function Home() {
           type={"movie"}
         />
       )}
-      <Hero />
+      <Hero movies={movies} />
       <Homepage title={"Trending"} movies={movies} tv={tv} />
       <LatestTrailers
         open={open}
