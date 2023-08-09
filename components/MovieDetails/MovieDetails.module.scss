@@ -69,8 +69,17 @@
           font-size: 18px;
         }
         p {
-          margin-top: 4px;
+          margin-top: 10px;
           font-size: 15px;
+          display: flex;
+          align-items: center;
+          a {
+            img {
+              width: auto;
+              height: 30px;
+              margin-right: 5px;
+            }
+          }
         }
       }
     }

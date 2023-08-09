@@ -85,14 +85,47 @@ const MovieDetails = ({ movieid, mediatype, details, cast }) => {
             <h4>Original language</h4>
             <p>{lang || details.original_language}</p>
           </div>
-          <div className={styles.budget}>
-            <h4>Budget</h4>
-            <p>${currencyFormatter.format(details.budget, { code: "USC" })}</p>
-          </div>
-          <div className={styles.Revenue}>
-            <h4>Revenue</h4>
-            <p>${currencyFormatter.format(details.revenue, { code: "USC" })}</p>
-          </div>
+          {mediatype == "tv" ? (
+            <div className={styles.networks}>
+              <h4>Networks</h4>
+              {details?.networks?.map((network, i) => (
+                <p key={i}>
+                  <Link
+                    href={`https://www.themoviedb.org/t/p/original${network.logo_path}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Image
+                      src={`https://www.themoviedb.org/t/p/h30${network.logo_path}`}
+                      alt="image"
+                      width={1000}
+                      height={1000}
+                    />
+                  </Link>{" "}
+                </p>
+              ))}
+            </div>
+          ) : (
+            <div className={styles.budget}>
+              <h4>Budget</h4>
+              <p>
+                ${currencyFormatter.format(details.budget, { code: "USC" })}
+              </p>
+            </div>
+          )}
+          {mediatype == "tv" ? (
+            <div>
+              <h4>Type</h4>
+              <p>{details.type}</p>
+            </div>
+          ) : (
+            <div className={styles.Revenue}>
+              <h4>Revenue</h4>
+              <p>
+                ${currencyFormatter.format(details.revenue, { code: "USC" })}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
