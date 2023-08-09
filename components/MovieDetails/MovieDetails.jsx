@@ -5,10 +5,24 @@ import { BsLink } from "react-icons/bs";
 import currencyFormatter from "currency-formatter";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 
 const MovieDetails = ({ movieid, mediatype, details, cast }) => {
   const [lang, setlang] = useState();
+  const [reviews, setReviews] = useState([]);
+  const [substringit, setsubstringit] = useState(true);
+  const fetchData = async () => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/${mediatype}/${movieid}/reviews?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}`
+    );
+    setReviews(data.results);
+
+    // console.log("====================================");
+    // console.log(reviews);
+    // console.log("====================================");
+  };
   useEffect(() => {
+    fetchData();
     if (
       typeof details.original_language === "string" &&
       details.original_language?.length === 2
@@ -27,6 +41,8 @@ const MovieDetails = ({ movieid, mediatype, details, cast }) => {
       }
     }
   }, []);
+  const singleReview =
+    reviews[Math.floor(Math.random() * (reviews.length - 1 - 0))];
   return (
     <div className={styles.container}>
       <div className={styles.main}>
@@ -64,6 +80,70 @@ const MovieDetails = ({ movieid, mediatype, details, cast }) => {
                   </div>
                 </div>
               ))}
+          </div>
+        </div>
+        <div className={styles.social}>
+          <h2>Social</h2>
+          <div className={styles.reviewcontainer}>
+            <h4>Reviews</h4>
+            {reviews.length ? (
+              <div className={styles.review}>
+                <div className={styles.author}>
+                  <Image
+                    src={
+                      singleReview?.author_details.avatar_path
+                        ? `https://www.themoviedb.org/t/p/original${singleReview.author_details.avatar_path}`
+                        : `/placeholder.png`
+                    }
+                    alt="image"
+                    width={1000}
+                    height={1000}
+                  />
+                  <span>
+                    <h3>A review by {singleReview?.author}.</h3>
+                    <p>
+                      Written on{" "}
+                      {new Date(singleReview?.created_at).toLocaleDateString(
+                        "en-US",
+                        {
+                          month: "long",
+                          day: "numeric",
+                          year: "numeric",
+                        }
+                      )}
+                    </p>
+                  </span>
+                </div>
+                <pre>
+                  <p>
+                    {(singleReview?.content.length > 600) & substringit
+                      ? singleReview?.content.substring(0, 600)
+                      : singleReview?.content}
+                    {substringit & (singleReview?.content.length > 600) ? (
+                      <span onClick={() => setsubstringit(false)}>
+                        ...read the rest.
+                      </span>
+                    ) : (substringit == false) &
+                      (singleReview?.content.length > 600) ? (
+                      <span onClick={() => setsubstringit(true)}>
+                        show less
+                      </span>
+                    ) : (
+                      <></>
+                    )}
+                  </p>
+                </pre>
+              </div>
+            ) : (
+              <div>
+                <h1>No Reviews currently</h1>
+              </div>
+            )}
+            {reviews.length ? (
+              <h4 className={styles.all}>Read All Reviews.</h4>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>
