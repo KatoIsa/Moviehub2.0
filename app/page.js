@@ -17,6 +17,9 @@ export default function Home() {
   const [randombackdrop, setrandombackdrop] = useState("");
   const [randomindex, setrandomindex] = useState("");
   const [randomid, setrandomid] = useState("");
+  const [randompage, setrandompage] = useState(
+    Math.floor(Math.random() * 5 - 1 + 1)
+  );
 
   const fetchTrending = async () => {
     const { data } = await axios.get(
@@ -31,15 +34,11 @@ export default function Home() {
     settv(data2.data.results);
 
     const data3 = await axios.get(
-      `https://api.themoviedb.org/3/movie/top_rated?api_key=${
-        process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY
-      }&page=${Math.floor(Math.random() * 5 - 1 + 1)}`
+      `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&page=${randompage}`
     );
     settopmovies(data3.data.results);
     const data4 = await axios.get(
-      `https://api.themoviedb.org/3/tv/top_rated?api_key=${
-        process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY
-      }&page=${Math.floor(Math.random() * 5 - 1 + 1)}`
+      `https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&page=${randompage}`
     );
     settoptv(data4.data.results);
     setrandomid(movies[Math.floor(Math.random() * (19 - 1))]?.id);
