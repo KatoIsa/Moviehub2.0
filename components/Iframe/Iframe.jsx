@@ -19,7 +19,9 @@ const Iframe = ({ open, movieid, handleclose, type }) => {
   return (
     <div className={styles.container}>
       <iframe
-        src={`https://www.youtube.com/embed/${trailer?.key}`}
+        src={`https://www.youtube.com/embed/${
+          trailer?.key || trailers[0]?.key
+        }`}
         width="500"
         height="300"
         frameBorder="0"

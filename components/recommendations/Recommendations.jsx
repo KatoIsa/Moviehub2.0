@@ -40,7 +40,7 @@ const Recommendations = ({ recommendation, name }) => {
         </div>
       ) : (
         <p className={styles.info}>
-          Not yet enough data to suggest movies based on {name}.
+          Not yet enough data for suggestions based on {name}.
         </p>
       )}
     </div>
