@@ -26,10 +26,10 @@ const Recommendations = ({ recommendation, name }) => {
               </div>
               <span>
                 <p>
-                  {r.name?.length > 25 || r.title?.length > 25
-                    ? r.name?.substring(0, 24) || r.title?.substring(0, 24)
+                  {r.name?.length > 23 || r.title?.length > 23
+                    ? r.name?.substring(0, 22) || r.title?.substring(0, 22)
                     : r.name || r.title}
-                  {r?.name?.length > 25 || (r?.title?.length > 25 && "...")}
+                  {r?.title?.length || (r?.name?.length > 24 && "...")}
                 </p>{" "}
                 <span>
                   {((r.vote_average / 10).toFixed(2) * 100).toFixed(0)}%
