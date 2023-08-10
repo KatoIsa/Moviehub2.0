@@ -14,6 +14,9 @@ export default function Home() {
   const [toptv, settoptv] = useState([]);
   const [movieid, setmovieid] = useState(0);
   const [open, setopen] = useState(false);
+  const [randombackdrop, setrandombackdrop] = useState("");
+  const [randomindex, setrandomindex] = useState("");
+  const [randomid, setrandomid] = useState("");
 
   const fetchTrending = async () => {
     const { data } = await axios.get(
@@ -28,13 +31,26 @@ export default function Home() {
     settv(data2.data.results);
 
     const data3 = await axios.get(
-      `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&page=1`
+      `https://api.themoviedb.org/3/movie/top_rated?api_key=${
+        process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY
+      }&page=${Math.floor(Math.random() * 5 - 1 + 1)}`
     );
     settopmovies(data3.data.results);
     const data4 = await axios.get(
-      `https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&page=1`
+      `https://api.themoviedb.org/3/tv/top_rated?api_key=${
+        process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY
+      }&page=${Math.floor(Math.random() * 5 - 1 + 1)}`
     );
     settoptv(data4.data.results);
+    setrandomid(movies[Math.floor(Math.random() * (19 - 1))]?.id);
+    const images = await axios.get(
+      `https://api.themoviedb.org/3/movie/${movies[0].id}/images?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}`
+    );
+    console.log(images.data);
+    setrandomindex(
+      Math.floor(Math.random() * images.data.backdrops?.length - 1)
+    );
+    setrandombackdrop(images.data.backdrops[randomindex]?.file_path);
   };
   const handleopen = (m) => {
     setmovieid(m.id);
@@ -49,6 +65,8 @@ export default function Home() {
   }, []);
   return (
     <main className={styles.main}>
+      {console.log(randombackdrop)}
+      {console.log(randomindex)}
       {open && (
         <Iframe
           movieid={movieid}
@@ -57,14 +75,9 @@ export default function Home() {
           type={"movie"}
         />
       )}
-      <Hero movies={movies} />
+      <Hero movies={movies} randombackdrop={randombackdrop} />
       <Homepage title={"Trending"} movies={movies} tv={tv} />
-      <LatestTrailers
-        open={open}
-        handleopen={handleopen}
-        movieid={movieid}
-        setmovieid={setmovieid}
-      />
+      <LatestTrailers handleopen={handleopen} />
       <Homepage title={"What's popular"} movies={topmovies} tv={toptv} />
     </main>
   );
