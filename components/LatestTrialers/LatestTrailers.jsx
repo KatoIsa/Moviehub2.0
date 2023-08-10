@@ -16,8 +16,21 @@ const LatestTrailers = ({ handleopen }) => {
   useEffect(() => {
     fetchUpcomming();
   }, []);
+  const backdrop = `https://www.themoviedb.org/t/p/original${
+    movies[Math.floor(Math.random() * (movies.length - 2) + 1)]?.backdrop_path
+  }`;
   return (
-    <section className={styles.container}>
+    <section
+      className={styles.container}
+      style={{
+        backgroundImage: `linear-gradient(
+      to right,
+      rgba(var(--DarkBlue), 0.8) 0%,
+      rgba(var(--DarkBlue), 0.6)
+    ),
+    url("${backdrop}")`,
+      }}
+    >
       <div className={styles.column}>
         <h1>Latest Trailers</h1>
         <div className={styles.videos}>
