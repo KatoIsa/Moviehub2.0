@@ -3,31 +3,28 @@ import { useState, useEffect } from "react";
 import styles from "./Hero.module.scss";
 import axios from "axios";
 
-const Hero = ({ movies }) => {
-  const randomId =
-    movies[Math.floor(Math.random() * (movies.length - 1))]?.id ||
-    movies[0]?.id;
-
-  const [randombackdrop, setrandombackdrop] = useState("");
-  const getImages = async () => {
+const Hero = () => {
+  const [movies, setmovies] = useState([]);
+  const fetchUpcomming = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/movie/${randomId}/images?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}`
+      `https://api.themoviedb.org/3/movie/now_playing?language=en-US&api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&page=1`
     );
-    setrandombackdrop(
-      data.backdrops[Math.floor(Math.random() * data.backdrops.length - 2)]
-        ?.file_path
-    );
+    setmovies(data.results);
   };
   useEffect(() => {
-    getImages();
+    fetchUpcomming();
   }, []);
+  const backdrop = `https://www.themoviedb.org/t/p/original${
+    movies[Math.floor(Math.random() * (movies.length - 2) + 1)]?.backdrop_path
+  }`;
   return (
     <section
       className={styles.container}
       style={{
-        backgroundImage: `linear-gradient(to right, rgba(var(--DarkBlue), 0.8) 0%,rgba(var(--DarkBlue), 0.4)),url("https://www.themoviedb.org/t/p/original${randombackdrop}")`,
+        backgroundImage: `linear-gradient(to right, rgba(var(--DarkBlue), 0.8) 0%,rgba(var(--DarkBlue), 0.4)),url("${backdrop}")`,
       }}
     >
+      {console.log(backdrop)}
       <div className={styles.txt}>
         <h1>Welcome.</h1>
         <h2>

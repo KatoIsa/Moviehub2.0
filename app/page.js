@@ -75,7 +75,7 @@ export default function Home() {
           type={"movie"}
         />
       )}
-      <Hero movies={movies} randombackdrop={randombackdrop} />
+      <Hero />
       <Homepage title={"Trending"} movies={movies} tv={tv} />
       <LatestTrailers handleopen={handleopen} />
       <Homepage title={"What's popular"} movies={topmovies} tv={toptv} />
