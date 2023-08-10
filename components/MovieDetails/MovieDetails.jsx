@@ -5,21 +5,35 @@ import { BsLink } from "react-icons/bs";
 import currencyFormatter from "currency-formatter";
 import Image from "next/image";
 import Link from "next/link";
+import Media from "../Media/Media";
+import Recommendations from "../recommendations/Recommendations";
 import axios from "axios";
 
-const MovieDetails = ({ movieid, mediatype, details, cast }) => {
+const MovieDetails = ({ movieid, mediatype, details, cast, name }) => {
   const [lang, setlang] = useState();
   const [reviews, setReviews] = useState([]);
   const [substringit, setsubstringit] = useState(true);
+  const [images, setimages] = useState();
+  const [videos, setvideos] = useState([]);
+  const [recommendation, setrecommendation] = useState([]);
   const fetchData = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/${mediatype}/${movieid}/reviews?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}`
     );
     setReviews(data.results);
+    const images = await axios.get(
+      `https://api.themoviedb.org/3/${mediatype}/${movieid}/images?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}`
+    );
+    setimages(images.data);
+    const thevideos = await axios.get(
+      `https://api.themoviedb.org/3/${mediatype}/${movieid}/videos?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&page=1`
+    );
+    setvideos(thevideos.data.results);
 
-    // console.log("====================================");
-    // console.log(reviews);
-    // console.log("====================================");
+    const therecommendations = await axios.get(
+      `https://api.themoviedb.org/3/${mediatype}/${movieid}/recommendations?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}`
+    );
+    setrecommendation(therecommendations.data.results);
   };
   useEffect(() => {
     fetchData();
@@ -41,8 +55,7 @@ const MovieDetails = ({ movieid, mediatype, details, cast }) => {
       }
     }
   }, []);
-  const singleReview =
-    reviews[Math.floor(Math.random() * (reviews.length - 1 - 0))];
+  const singleReview = reviews[0];
   return (
     <div className={styles.container}>
       <div className={styles.main}>
@@ -146,6 +159,8 @@ const MovieDetails = ({ movieid, mediatype, details, cast }) => {
             )}
           </div>
         </div>
+        <Media images={images} amount={10} videos={videos} />
+        <Recommendations recommendation={recommendation} name={name} />
       </div>
       <div className={styles.sidebar}>
         <Link
