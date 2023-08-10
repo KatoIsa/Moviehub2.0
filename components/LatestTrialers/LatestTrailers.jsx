@@ -34,7 +34,7 @@ const LatestTrailers = ({ handleopen }) => {
       <div className={styles.column}>
         <h1>Latest Trailers</h1>
         <div className={styles.videos}>
-          {movies.map((movie, _i) => (
+          {movies.reverse().map((movie, _i) => (
             <div
               onClick={() => {
                 handleopen(movie);
