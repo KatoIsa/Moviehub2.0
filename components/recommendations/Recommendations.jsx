@@ -5,7 +5,6 @@ import Image from "next/image";
 const Recommendations = ({ recommendation, name }) => {
   return (
     <div className={styles.container}>
-      {console.log(recommendation)}
       <h2>Recommendations</h2>
       {recommendation.length ? (
         <div className={styles.therecomms}>

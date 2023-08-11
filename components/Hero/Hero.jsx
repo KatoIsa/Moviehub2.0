@@ -24,7 +24,6 @@ const Hero = () => {
         backgroundImage: `linear-gradient(to right, rgba(var(--DarkBlue), 0.8) 0%,rgba(var(--DarkBlue), 0.4)),url("${backdrop}")`,
       }}
     >
-      {console.log(backdrop)}
       <div className={styles.txt}>
         <h1>Welcome.</h1>
         <h2>

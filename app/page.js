@@ -45,7 +45,6 @@ export default function Home() {
     const images = await axios.get(
       `https://api.themoviedb.org/3/movie/${movies[0].id}/images?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}`
     );
-    console.log(images.data);
     setrandomindex(
       Math.floor(Math.random() * images.data.backdrops?.length - 1)
     );
@@ -64,8 +63,6 @@ export default function Home() {
   }, []);
   return (
     <main className={styles.main}>
-      {console.log(randombackdrop)}
-      {console.log(randomindex)}
       {open && (
         <Iframe
           movieid={movieid}
