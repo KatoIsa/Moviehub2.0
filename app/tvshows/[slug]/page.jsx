@@ -54,7 +54,18 @@ https://api.themoviedb.org/3/tv/${slug}/credits?api_key=${process.env.NEXT_PUBLI
         />
       )}
       <div className={styles.heading}>
-        <h2>overview</h2>
+        <Link href={`#`}>
+          <h2>Overview</h2>
+        </Link>
+        <Link href={`/movies/${details.id}/media`}>
+          <h2>Media</h2>
+        </Link>
+        <Link href={`media`}>
+          <h2>Reviews</h2>
+        </Link>
+        <Link href={`media`}>
+          <h2>Full Cast and Crew</h2>
+        </Link>
       </div>
       <div
         className={styles.header}
@@ -146,6 +157,7 @@ https://api.themoviedb.org/3/tv/${slug}/credits?api_key=${process.env.NEXT_PUBLI
         mediatype="tv"
         cast={castmembers}
         details={details}
+        name={details.name}
       />
     </div>
   );
