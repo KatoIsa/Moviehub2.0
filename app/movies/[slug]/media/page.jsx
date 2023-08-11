@@ -4,6 +4,7 @@ import styles from "./Media.module.scss";
 import Link from "next/link";
 import axios from "axios";
 import Image from "next/image";
+import Subnav from "@/components/subnav/Subnav";
 
 const Page = ({ params: { slug } }) => {
   const [media, setmedia] = useState([]);
@@ -32,20 +33,7 @@ const Page = ({ params: { slug } }) => {
   }, []);
   return (
     <div className={styles.container}>
-      <div className={styles.heading}>
-        <Link href={`/movies/${slug}`}>
-          <h2>Overview</h2>
-        </Link>
-        <Link href={`/movies/${slug}/media`}>
-          <h2>Media</h2>
-        </Link>
-        <Link href={`media`}>
-          <h2>Reviews</h2>
-        </Link>
-        <Link href={`media`}>
-          <h2>Full Cast and Crew</h2>
-        </Link>
-      </div>
+      <Subnav mediatype={"movies"} id={slug} />
       <Link href={`/movies/${slug}`} className={styles.moviedetails}>
         <Image
           src={`https://www.themoviedb.org/t/p/original/${details.poster_path}`}
@@ -62,8 +50,6 @@ const Page = ({ params: { slug } }) => {
       </Link>
 
       <div className={styles.mediacontainer}>
-        {console.log("filtered media", filteredMedia)}
-        {console.log("media", mediatype)}
         <div className={styles.mediafilter}>
           <ul>
             <li

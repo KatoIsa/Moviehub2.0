@@ -153,7 +153,14 @@ const MovieDetails = ({ movieid, mediatype, details, cast, name }) => {
               </div>
             )}
             {reviews.length ? (
-              <h4 className={styles.all}>Read All Reviews.</h4>
+              <Link
+                href={`/${
+                  mediatype == "movie" ? "movies" : "tvshows"
+                }/${movieid}/reviews`}
+                className={styles.all}
+              >
+                Read All Reviews.
+              </Link>
             ) : (
               <></>
             )}
@@ -211,9 +218,7 @@ const MovieDetails = ({ movieid, mediatype, details, cast, name }) => {
           ) : (
             <div className={styles.budget}>
               <h4>Budget</h4>
-              <p>
-                ${currencyFormatter.format(details.budget, { code: "USC" })}
-              </p>
+              <p>{currencyFormatter.format(details.budget, { code: "USD" })}</p>
             </div>
           )}
           {mediatype == "tv" ? (
@@ -225,7 +230,7 @@ const MovieDetails = ({ movieid, mediatype, details, cast, name }) => {
             <div className={styles.Revenue}>
               <h4>Revenue</h4>
               <p>
-                ${currencyFormatter.format(details.revenue, { code: "USC" })}
+                {currencyFormatter.format(details.revenue, { code: "USD" })}
               </p>
             </div>
           )}

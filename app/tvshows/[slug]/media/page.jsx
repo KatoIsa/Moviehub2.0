@@ -32,20 +32,7 @@ const Page = ({ params: { slug } }) => {
   }, []);
   return (
     <div className={styles.container}>
-      <div className={styles.heading}>
-        <Link href={`/tvshows/${slug}`}>
-          <h2>Overview</h2>
-        </Link>
-        <Link href={`/tvshows/${slug}/media`}>
-          <h2>Media</h2>
-        </Link>
-        <Link href={`media`}>
-          <h2>Reviews</h2>
-        </Link>
-        <Link href={`media`}>
-          <h2>Full Cast and Crew</h2>
-        </Link>
-      </div>
+      <Subnav mediatype={"tvshows"} id={slug} />
       <Link href={`/tvshows/${slug}`} className={styles.moviedetails}>
         <Image
           src={`https://www.themoviedb.org/t/p/original/${details.poster_path}`}

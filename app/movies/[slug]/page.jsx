@@ -7,6 +7,7 @@ import Image from "next/image";
 import { FaPlay } from "react-icons/fa";
 import Link from "next/link";
 import MovieDetails from "@/components/MovieDetails/MovieDetails";
+import Subnav from "@/components/subnav/Subnav";
 
 const Page = ({ params: { slug } }) => {
   const [open, setopen] = useState(false);
@@ -50,20 +51,7 @@ https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.NEXT_PU
           type={"movie"}
         />
       )}
-      <div className={styles.heading}>
-        <Link href={`#`}>
-          <h2>Overview</h2>
-        </Link>
-        <Link href={`/movies/${details.id}/media`}>
-          <h2>Media</h2>
-        </Link>
-        <Link href={`media`}>
-          <h2>Reviews</h2>
-        </Link>
-        <Link href={`media`}>
-          <h2>Full Cast and Crew</h2>
-        </Link>
-      </div>
+      <Subnav mediatype={"movies"} id={details.id} />
       <div
         className={styles.header}
         style={{
