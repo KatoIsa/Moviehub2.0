@@ -1,0 +1,125 @@
+.container {
+  margin-top: 64px;
+
+  .social {
+    margin: 50px auto;
+    width: 95%;
+    display: flex;
+    .number {
+      width: 20%;
+      h2 {
+        background-color: rgba(var(--DarkBlue));
+        border-radius: 5rem;
+        display: inline;
+        padding: 5px 20px;
+        color: #fff;
+        font-weight: 600;
+        cursor: alias;
+      }
+    }
+    .reviewcontainer {
+      width: 80%;
+      h4 {
+        margin: 10px 0;
+      }
+      .all {
+        cursor: pointer;
+        &:hover {
+          color: rgba(var(--darkerGrey));
+        }
+      }
+      .review {
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(var(--darkerGrey));
+        border-radius: 8px;
+        padding: 20px;
+        margin: 0 0 20px 20px;
+        .author {
+          display: flex;
+          align-items: center;
+          margin-bottom: 20px;
+          span {
+            margin-left: 10px;
+            h3 {
+              margin-bottom: 4px;
+            }
+            p {
+              font-size: 14px;
+            }
+          }
+          img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+          }
+        }
+        pre {
+          white-space: pre-wrap;
+          p {
+            font-size: 14px;
+            span {
+              text-decoration: underline;
+              cursor: pointer;
+              &:hover {
+                color: rgba(var(--darkerGrey));
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .moviedetails {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgba(var(--DarkBlue));
+    color: #fff;
+    padding: 15px 20px;
+    img {
+      width: 58px;
+      height: 87px;
+      margin-right: 10px;
+    }
+    .subnav {
+      h1 {
+        &:hover {
+          color: #cccc;
+        }
+      }
+      p {
+        color: #cccc;
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    .moviedetails {
+      .subnav {
+        h1 {
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .social {
+      flex-direction: column;
+      .number {
+        width: 100%;
+      }
+      .reviewcontainer {
+        width: 100%;
+        margin: 35px 0;
+        .review {
+          margin: 0 0 20px 0;
+          padding: 20px 10px;
+        }
+      }
+    }
+  }
+}
