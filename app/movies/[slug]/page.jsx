@@ -11,8 +11,7 @@ import MovieDetails from "@/components/MovieDetails/MovieDetails";
 const Page = ({ params: { slug } }) => {
   const [open, setopen] = useState(false);
   const [details, setdetails] = useState({});
-  const [writers, setwriters] = useState({});
-  const [director, setdirector] = useState({});
+  const [writersandDirectors, setwritersandDirectors] = useState([]);
   const [castmembers, setcastmembers] = useState([]);
 
   const fetchMovieDetails = async () => {
@@ -23,15 +22,13 @@ const Page = ({ params: { slug } }) => {
 
     const cast = await axios.get(`
 https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}`);
-    const writer = cast.data?.crew.filter(
-      (item) => item.known_for_department == "Writing"
-    );
-    const Director = cast.data?.crew.filter(
-      (item) => item.known_for_department == "Directing"
+    const writersndirectors = cast.data?.crew.filter(
+      (item) =>
+        item.known_for_department == "Writing" ||
+        item.known_for_department == "Directing"
     );
     setcastmembers(cast.data);
-    setwriters(writer[0]);
-    setdirector(Director[0]);
+    setwritersandDirectors(writersndirectors.filter((w, i) => i < 9));
   };
   useEffect(() => {
     fetchMovieDetails();
@@ -54,7 +51,18 @@ https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.NEXT_PU
         />
       )}
       <div className={styles.heading}>
-        <h2>overview</h2>
+        <Link href={`#`}>
+          <h2>Overview</h2>
+        </Link>
+        <Link href={`/movies/${details.id}/media`}>
+          <h2>Media</h2>
+        </Link>
+        <Link href={`media`}>
+          <h2>Reviews</h2>
+        </Link>
+        <Link href={`media`}>
+          <h2>Full Cast and Crew</h2>
+        </Link>
       </div>
       <div
         className={styles.header}
@@ -91,7 +99,6 @@ https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.NEXT_PU
               {details.title}({new Date(details.release_date).getFullYear()})
             </h1>
             <span>
-              {}
               <p>{details.release_date}</p> <div></div>
               {details.genres?.map((genre, _i) => (
                 <p key={genre.id}>{genre.name},</p>
@@ -134,14 +141,12 @@ https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.NEXT_PU
             <p>{details.overview}</p>
           </div>
           <div className={styles.writer}>
-            <section>
-              <h3>{writers.name}</h3>
-              <p>{writers.known_for_department}</p>
-            </section>
-            <section>
-              <h3>{director.name}</h3>
-              <p>{director.known_for_department}</p>
-            </section>
+            {writersandDirectors.map((writer, i) => (
+              <section key={i}>
+                <h3>{writer?.name}</h3>
+                <p>{writer?.known_for_department}</p>
+              </section>
+            ))}
           </div>
         </div>
       </div>
@@ -150,6 +155,7 @@ https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.NEXT_PU
         mediatype="movie"
         cast={castmembers}
         details={details}
+        name={details.title}
       />
     </div>
   );
