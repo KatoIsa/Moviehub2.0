@@ -160,6 +160,14 @@ const MovieDetails = ({ movieid, mediatype, details, cast, name }) => {
           </div>
         </div>
         <Media images={images} amount={10} videos={videos} />
+        <Link
+          href={`/${
+            mediatype == "movie" ? "movies" : "tvshows"
+          }/${movieid}/media`}
+          className={styles.allmedia}
+        >
+          View All Media
+        </Link>
         <Recommendations recommendation={recommendation} name={name} />
       </div>
       <div className={styles.sidebar}>
