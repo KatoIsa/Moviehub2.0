@@ -4,6 +4,7 @@ import styles from "../../../movies/[slug]/media/Media.module.scss";
 import Link from "next/link";
 import axios from "axios";
 import Image from "next/image";
+import Subnav from "@/components/subnav/Subnav";
 
 const Page = ({ params: { slug } }) => {
   const [media, setmedia] = useState([]);
