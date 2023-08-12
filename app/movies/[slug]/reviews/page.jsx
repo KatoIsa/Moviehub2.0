@@ -6,7 +6,7 @@ import Image from "next/image";
 import axios from "axios";
 import Subnav from "@/components/subnav/Subnav";
 
-const page = ({ params: { slug } }) => {
+const Page = ({ params: { slug } }) => {
   const [details, setdetails] = useState([]);
   const [Reviews, setReviews] = useState([]);
   const [substringit, setsubstringit] = useState(true);
@@ -52,7 +52,7 @@ const page = ({ params: { slug } }) => {
         <div className={styles.reviewcontainer}>
           {Reviews.length ? (
             Reviews.map((r, i) => (
-              <div className={styles.review}>
+              <div className={styles.review} key={i}>
                 <div className={styles.author}>
                   <Image
                     src={
@@ -107,4 +107,4 @@ const page = ({ params: { slug } }) => {
   );
 };
 
-export default page;
+export default Page;
