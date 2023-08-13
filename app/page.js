@@ -15,7 +15,7 @@ export default function Home() {
   const [movieid, setmovieid] = useState(0);
   const [open, setopen] = useState(false);
   const [randompage, setrandompage] = useState(
-    Math.floor(Math.random() * 5 - 1 + 1)
+    Math.floor(Math.random() * 6 + 1)
   );
 
   const fetchTrending = async () => {
