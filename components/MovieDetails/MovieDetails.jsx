@@ -100,7 +100,7 @@ const MovieDetails = ({ movieid, mediatype, details, cast, name }) => {
             }/${movieid}/cast`}
             className={styles.allLink}
           >
-            Full cast and crew.
+            <h4>Full cast and crew.</h4>
           </Link>
         </div>
         <div className={styles.social}>
@@ -167,7 +167,7 @@ const MovieDetails = ({ movieid, mediatype, details, cast, name }) => {
                 }/${movieid}/reviews`}
                 className={styles.all}
               >
-                Read All Reviews.
+                <h4>Read All Reviews.</h4>
               </Link>
             ) : (
               <></>
