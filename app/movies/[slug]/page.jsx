@@ -132,7 +132,7 @@ https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.NEXT_PU
             {writersandDirectors.map((writer, i) => (
               <section key={i}>
                 <h3>{writer?.name}</h3>
-                <p>{writer?.known_for_department}</p>
+                <p>{writer?.job}</p>
               </section>
             ))}
           </div>
