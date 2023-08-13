@@ -6,13 +6,8 @@
   justify-content: center;
   color: #fff;
   margin-top: 64px;
-  background-image: linear-gradient(
-      to right,
-      rgba(var(--DarkBlue), 0.8) 0%,
-      rgba(var(--DarkBlue), 0)
-    ),
-    url("/image.jpg");
   background-position: center;
+  background-attachment: fixed;
   background-size: cover;
   .txt {
     width: 90%;
