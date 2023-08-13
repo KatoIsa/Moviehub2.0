@@ -12,8 +12,7 @@ import Subnav from "@/components/subnav/Subnav";
 const Page = ({ params: { slug } }) => {
   const [open, setopen] = useState(false);
   const [details, setdetails] = useState({});
-  const [writers, setwriters] = useState({});
-  const [director, setdirector] = useState({});
+  const [writersandDirectors, setwritersandDirectors] = useState([]);
   const [castmembers, setcastmembers] = useState([]);
 
   const fetchMovieDetails = async () => {
@@ -24,15 +23,14 @@ const Page = ({ params: { slug } }) => {
 
     const cast = await axios.get(`
 https://api.themoviedb.org/3/tv/${slug}/credits?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}`);
-    const writer = cast.data?.crew.filter(
-      (item) => item.known_for_department == "Writing"
-    );
-    const Director = cast.data?.crew.filter(
-      (item) => item.known_for_department == "Directing"
+    setwritersandDirectors(
+      cast.data?.crew.filter(
+        (item) =>
+          item.known_for_department == "Writing" ||
+          item.known_for_department == "Directing"
+      )
     );
     setcastmembers(cast.data);
-    setwriters(writer[0]);
-    setdirector(Director[0]);
   };
   useEffect(() => {
     fetchMovieDetails();
@@ -129,14 +127,12 @@ https://api.themoviedb.org/3/tv/${slug}/credits?api_key=${process.env.NEXT_PUBLI
             <p>{details.overview}</p>
           </div>
           <div className={styles.writer}>
-            <section>
-              <h3>{writers?.name}</h3>
-              <p>{writers?.known_for_department}</p>
-            </section>
-            <section>
-              <h3>{director?.name}</h3>
-              <p>{director?.known_for_department}</p>
-            </section>
+            {writersandDirectors.map((writer, i) => (
+              <section key={i}>
+                <h3>{writer?.name}</h3>
+                <p>{writer?.job}</p>
+              </section>
+            ))}
           </div>
         </div>
       </div>
