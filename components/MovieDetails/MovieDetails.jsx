@@ -94,6 +94,14 @@ const MovieDetails = ({ movieid, mediatype, details, cast, name }) => {
                 </div>
               ))}
           </div>
+          <Link
+            href={`/${
+              mediatype == "movie" ? "movies" : "tvshows"
+            }/${movieid}/cast`}
+            className={styles.allLink}
+          >
+            Full cast and crew.
+          </Link>
         </div>
         <div className={styles.social}>
           <h2>Social</h2>
