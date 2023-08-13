@@ -1,0 +1,92 @@
+.container {
+  margin-top: 64px;
+  .moviedetails {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgba(var(--DarkBlue));
+    color: #fff;
+    padding: 15px 20px;
+    img {
+      width: 58px;
+      height: 87px;
+      margin-right: 10px;
+    }
+    .subnav {
+      h1 {
+        &:hover {
+          color: #cccc;
+        }
+      }
+      p {
+        color: #cccc;
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+  .credits {
+    display: flex;
+    padding: 30px 60px;
+    h3 {
+      span {
+        color: #999999cc;
+      }
+    }
+    .crew,
+    .cast {
+      .thecast {
+        margin: 20px 0;
+        div {
+          display: flex;
+          align-items: center;
+          margin-bottom: 15px;
+          img {
+            object-fit: cover;
+            object-position: top;
+            width: 66px;
+            height: 66px;
+            border-radius: 5px;
+            margin-right: 10px;
+          }
+          section {
+            p {
+              font-weight: 400;
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+    .crew {
+      width: 50%;
+    }
+    .cast {
+      width: 50%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    .moviedetails {
+      .subnav {
+        h1 {
+          font-size: 1.2rem;
+        }
+      }
+    }
+    .credits {
+      display: flex;
+      flex-direction: column;
+      padding: 20px 10px;
+      .crew {
+        width: 100%;
+      }
+      .cast {
+        width: 100%;
+      }
+    }
+  }
+}
