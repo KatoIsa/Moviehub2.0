@@ -50,8 +50,6 @@ const Page = ({ params: { slug } }) => {
       </Link>
 
       <div className={styles.mediacontainer}>
-        {console.log("filtered media", filteredMedia)}
-        {console.log("media", mediatype)}
         <div className={styles.mediafilter}>
           <ul>
             <li

@@ -20,8 +20,6 @@ const Page = ({ params: { slug } }) => {
 https://api.themoviedb.org/3/tv/${slug}/credits?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}`);
     setcrew(credits.data?.crew);
     setcast(credits.data?.cast);
-    console.log("cast", cast);
-    console.log("crew", crew);
   };
 
   useEffect(() => {
