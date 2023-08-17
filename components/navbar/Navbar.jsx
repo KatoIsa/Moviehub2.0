@@ -17,17 +17,20 @@ const Navbar = () => {
           MovieHub <div></div>
         </h1>
       </Link>
-      <ul style={{ left: `${open ? "0" : "-100vw"}` }}>
+      <ul
+        onClick={() => setOpen(false)}
+        style={{ left: `${open ? "0" : "-100vw"}` }}
+      >
         <Link href={"/"}>
           <li>Home</li>
         </Link>
-        <Link href={"/"}>
+        <Link href={"/movies"}>
           <li>Movies</li>
         </Link>
-        <Link href={"/"}>
+        <Link href={"/tvshows"}>
           <li>TV Shows</li>
         </Link>
-        <Link href={"/"}>
+        <Link href={"/people"}>
           <li>People</li>
         </Link>
       </ul>
