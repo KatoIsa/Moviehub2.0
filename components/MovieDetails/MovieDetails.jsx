@@ -65,17 +65,8 @@ const MovieDetails = ({ movieid, mediatype, details, cast, name }) => {
             {cast.cast
               ?.filter((c, i) => i < 10)
               .map((c, i) => (
-                <div className={styles.actor} key={i}>
-                  <Link
-                    href={`${
-                      c.profile_path
-                        ? `https://www.themoviedb.org/t/p/original${c.profile_path}`
-                        : "/placeholder.png"
-                    }`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={styles.image}
-                  >
+                <Link href={`/people/${c.id}`} className={styles.actor} key={i}>
+                  <Link href={`/people/${c.id}`} className={styles.image}>
                     <Image
                       src={
                         c.profile_path
@@ -91,7 +82,7 @@ const MovieDetails = ({ movieid, mediatype, details, cast, name }) => {
                     <h4>{c.name}</h4>
                     <p>{c.character}</p>
                   </div>
-                </div>
+                </Link>
               ))}
           </div>
           <Link

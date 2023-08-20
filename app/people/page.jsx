@@ -14,7 +14,6 @@ const Page = () => {
       `https://api.themoviedb.org/3/person/popular?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&language=en-US&page=${page}`
     );
     setthepeople(data.results);
-    console.log(data);
     setNumberofpages(data.total_pages);
   };
   useEffect(() => {

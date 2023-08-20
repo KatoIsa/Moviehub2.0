@@ -50,7 +50,7 @@ https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.NEXT_PU
           <div className={styles.thecast}>
             {cast.length ? (
               cast.map((c, i) => (
-                <div key={i}>
+                <Link href={`/people/${c.id}`} key={i}>
                   <Image
                     src={
                       c.profile_path
@@ -64,7 +64,7 @@ https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.NEXT_PU
                   <section>
                     <h4>{c.name}</h4> <p>{c.character}</p>
                   </section>
-                </div>
+                </Link>
               ))
             ) : (
               <></>
@@ -77,7 +77,7 @@ https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.NEXT_PU
             <div className={styles.thecast}>
               {crew.length ? (
                 crew.map((c, i) => (
-                  <div key={i}>
+                  <Link href={`/people/${c.id}`} key={i}>
                     <Image
                       src={
                         c.profile_path
@@ -94,7 +94,7 @@ https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.NEXT_PU
                         {c.known_for_department} - {c.job}
                       </p>
                     </section>
-                  </div>
+                  </Link>
                 ))
               ) : (
                 <></>
