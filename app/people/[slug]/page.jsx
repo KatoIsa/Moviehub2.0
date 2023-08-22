@@ -21,8 +21,6 @@ const Page = ({ params: { slug } }) => {
     setCredits(tvcredits.data.cast);
 
     setDetails(data);
-
-    console.log(credits);
     setloading(false);
   };
 
