@@ -6,6 +6,7 @@ import Hero from "@/components/Hero/Hero";
 import Homepage from "@/components/Home/Home";
 import LatestTrailers from "@/components/LatestTrialers/LatestTrailers";
 import Iframe from "@/components/Iframe/Iframe";
+import Image from "next/image";
 
 export default function Home() {
   const [movies, setmovies] = useState([]);
@@ -17,6 +18,7 @@ export default function Home() {
   const [randompage, setrandompage] = useState(
     Math.floor(Math.random() * 10 + 1)
   );
+  const [loading, setloading] = useState(true);
 
   const fetchTrending = async () => {
     const { data } = await axios.get(
@@ -38,6 +40,7 @@ export default function Home() {
       `https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&page=${randompage}`
     );
     settoptv(data4.data.results);
+    setloading(false);
   };
   const handleopen = (m) => {
     setmovieid(m.id);
@@ -50,7 +53,16 @@ export default function Home() {
   useEffect(() => {
     fetchTrending();
   }, []);
-  return (
+  return loading ? (
+    <div className="loading">
+      <Image
+        src={"/loaderspinner.svg"}
+        alt="loading"
+        width={100}
+        height={100}
+      />
+    </div>
+  ) : (
     <main className={styles.main}>
       {open && (
         <Iframe

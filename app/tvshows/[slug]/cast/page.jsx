@@ -10,6 +10,7 @@ const Page = ({ params: { slug } }) => {
   const [cast, setcast] = useState([]);
   const [crew, setcrew] = useState([]);
   const [details, setdetails] = useState([]);
+  const [loading, setloading] = useState(true);
 
   const fetchData = async () => {
     const { data } = await axios.get(
@@ -20,6 +21,7 @@ const Page = ({ params: { slug } }) => {
 https://api.themoviedb.org/3/tv/${slug}/credits?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}`);
     setcrew(credits.data?.crew);
     setcast(credits.data?.cast);
+    setloading(false);
   };
 
   useEffect(() => {
@@ -28,81 +30,95 @@ https://api.themoviedb.org/3/tv/${slug}/credits?api_key=${process.env.NEXT_PUBLI
   return (
     <div className={styles.container}>
       <Subnav mediatype={"tvshows"} id={slug} />
-      <Link href={`/tvshows/${slug}`} className={styles.moviedetails}>
-        <Image
-          src={`https://www.themoviedb.org/t/p/original/${details.poster_path}`}
-          width={1000}
-          height={1000}
-          alt="image"
-        />
-        <div className={styles.subnav}>
-          <h1>
-            {details.name} ({new Date(details.first_air_date).getFullYear()})
-          </h1>
-          <p>&larr; Back to main.</p>
+      {loading ? (
+        <div className="loading">
+          <Image
+            src={"/loaderspinner.svg"}
+            alt="loading"
+            width={100}
+            height={100}
+          />
         </div>
-      </Link>
-      <div className={styles.credits}>
-        <div className={styles.cast}>
-          <h3>
-            Cast <span>{cast.length}</span>
-          </h3>
-          <div className={styles.thecast}>
-            {cast.length ? (
-              cast.map((c, i) => (
-                <Link href={`/people/${c.id}`} key={i}>
-                  <Image
-                    src={
-                      c.profile_path
-                        ? `https://www.themoviedb.org/t/p/original${c.profile_path}`
-                        : "/placeholder.png"
-                    }
-                    alt={c.name}
-                    width={1000}
-                    height={1000}
-                  />
-                  <section>
-                    <h4>{c.name}</h4> <p>{c.character}</p>
-                  </section>
-                </Link>
-              ))
-            ) : (
-              <></>
-            )}
-          </div>
-        </div>
-        <div className={styles.crew}>
-          <h3>
-            Crew <span>{crew.length}</span>
-            <div className={styles.thecast}>
-              {crew.length ? (
-                crew.map((c, i) => (
-                  <Link href={`/people/${c.id}`} key={i}>
-                    <Image
-                      src={
-                        c.profile_path
-                          ? `https://www.themoviedb.org/t/p/original${c.profile_path}`
-                          : "/placeholder.png"
-                      }
-                      alt={c.name}
-                      width={1000}
-                      height={1000}
-                    />
-                    <section>
-                      <h4>{c.name}</h4>{" "}
-                      <p>
-                        {c.known_for_department} - {c.job}
-                      </p>
-                    </section>
-                  </Link>
-                ))
-              ) : (
-                <></>
-              )}
+      ) : (
+        <>
+          <Link href={`/tvshows/${slug}`} className={styles.moviedetails}>
+            <Image
+              src={`https://www.themoviedb.org/t/p/original/${details.poster_path}`}
+              width={1000}
+              height={1000}
+              alt="image"
+            />
+            <div className={styles.subnav}>
+              <h1>
+                {details.name} ({new Date(details.first_air_date).getFullYear()}
+                )
+              </h1>
+              <p>&larr; Back to main.</p>
             </div>
-          </h3>
-        </div>
-      </div>
+          </Link>
+          <div className={styles.credits}>
+            <div className={styles.cast}>
+              <h3>
+                Cast <span>{cast.length}</span>
+              </h3>
+              <div className={styles.thecast}>
+                {cast.length ? (
+                  cast.map((c, i) => (
+                    <Link href={`/people/${c.id}`} key={i}>
+                      <Image
+                        src={
+                          c.profile_path
+                            ? `https://www.themoviedb.org/t/p/original${c.profile_path}`
+                            : "/placeholder.png"
+                        }
+                        alt={c.name}
+                        width={1000}
+                        height={1000}
+                      />
+                      <section>
+                        <h4>{c.name}</h4> <p>{c.character}</p>
+                      </section>
+                    </Link>
+                  ))
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+            <div className={styles.crew}>
+              <h3>
+                Crew <span>{crew.length}</span>
+                <div className={styles.thecast}>
+                  {crew.length ? (
+                    crew.map((c, i) => (
+                      <Link href={`/people/${c.id}`} key={i}>
+                        <Image
+                          src={
+                            c.profile_path
+                              ? `https://www.themoviedb.org/t/p/original${c.profile_path}`
+                              : "/placeholder.png"
+                          }
+                          alt={c.name}
+                          width={1000}
+                          height={1000}
+                        />
+                        <section>
+                          <h4>{c.name}</h4>{" "}
+                          <p>
+                            {c.known_for_department} - {c.job}
+                          </p>
+                        </section>
+                      </Link>
+                    ))
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              </h3>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

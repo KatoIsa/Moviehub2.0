@@ -10,6 +10,7 @@ const Page = ({ params: { slug } }) => {
   const [details, setdetails] = useState([]);
   const [Reviews, setReviews] = useState([]);
   const [substringit, setsubstringit] = useState(true);
+  const [loading, setloading] = useState(true);
 
   const fetchData = async () => {
     const { data } = await axios.get(
@@ -21,12 +22,22 @@ const Page = ({ params: { slug } }) => {
       `https://api.themoviedb.org/3/tv/${slug}/reviews?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}`
     );
     setReviews(reviews?.data?.results);
+    setloading(false);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-  return (
+  return loading ? (
+    <div className="loading">
+      <Image
+        src={"/loaderspinner.svg"}
+        alt="loading"
+        width={100}
+        height={100}
+      />
+    </div>
+  ) : (
     <div className={styles.container}>
       <Subnav mediatype={"tvshows"} id={slug} />
       <Link href={`/movies/${slug}`} className={styles.moviedetails}>

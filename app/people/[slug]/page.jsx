@@ -30,7 +30,14 @@ const Page = ({ params: { slug } }) => {
     fetchData();
   }, []);
   return loading ? (
-    <div className="loading">Loading</div>
+    <div className="loading">
+      <Image
+        src={"/loaderspinner.svg"}
+        alt="loading"
+        width={100}
+        height={100}
+      />
+    </div>
   ) : (
     <div className={styles.container}>
       <div className={styles.heading}>

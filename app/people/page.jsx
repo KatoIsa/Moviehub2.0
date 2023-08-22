@@ -4,6 +4,7 @@ import styles from "./People.module.scss";
 import Person from "@/components/Person/Person";
 import axios from "axios";
 import Custompagination from "@/components/CustomPagination/CustomPagination";
+import Image from "next/image";
 
 const Page = () => {
   const [thepeople, setthepeople] = useState([]);
@@ -22,7 +23,14 @@ const Page = () => {
     fetchdata();
   }, [page]);
   return loading ? (
-    <div className="loading">Loading</div>
+    <div className="loading">
+      <Image
+        src={"/loaderspinner.svg"}
+        alt="loading"
+        width={100}
+        height={100}
+      />
+    </div>
   ) : (
     <div className={styles.container}>
       <h2>Popular people</h2>

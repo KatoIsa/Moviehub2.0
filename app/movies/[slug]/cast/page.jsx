@@ -10,6 +10,7 @@ const Page = ({ params: { slug } }) => {
   const [cast, setcast] = useState([]);
   const [crew, setcrew] = useState([]);
   const [details, setdetails] = useState([]);
+  const [loading, setloading] = useState(true);
 
   const fetchData = async () => {
     const { data } = await axios.get(
@@ -20,12 +21,22 @@ const Page = ({ params: { slug } }) => {
 https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}`);
     setcrew(credits.data?.crew);
     setcast(credits.data?.cast);
+    setloading(false);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-  return (
+  return loading ? (
+    <div className="loading">
+      <Image
+        src={"/loaderspinner.svg"}
+        alt="loading"
+        width={100}
+        height={100}
+      />
+    </div>
+  ) : (
     <div className={styles.container}>
       <Subnav mediatype={"movies"} id={slug} />
       <Link href={`/movies/${slug}`} className={styles.moviedetails}>

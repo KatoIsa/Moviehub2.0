@@ -14,6 +14,7 @@ const Page = ({ params: { slug } }) => {
   const [details, setdetails] = useState({});
   const [writersandDirectors, setwritersandDirectors] = useState([]);
   const [castmembers, setcastmembers] = useState([]);
+  const [loading, setloading] = useState(true);
 
   const fetchMovieDetails = async () => {
     const { data } = await axios.get(
@@ -31,6 +32,7 @@ https://api.themoviedb.org/3/tv/${slug}/credits?api_key=${process.env.NEXT_PUBLI
       )
     );
     setcastmembers(cast.data);
+    setloading(false);
   };
   useEffect(() => {
     fetchMovieDetails();
@@ -42,7 +44,16 @@ https://api.themoviedb.org/3/tv/${slug}/credits?api_key=${process.env.NEXT_PUBLI
     setopen(false);
   };
   const rating = (details.vote_average?.toFixed(1) / 10) * 100;
-  return (
+  return loading ? (
+    <div className="loading">
+      <Image
+        src={"/loaderspinner.svg"}
+        alt="loading"
+        width={100}
+        height={100}
+      />
+    </div>
+  ) : (
     <div className={styles.container}>
       {open && (
         <Iframe
