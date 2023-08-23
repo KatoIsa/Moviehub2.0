@@ -33,118 +33,122 @@ const Page = ({ params: { slug } }) => {
   useEffect(() => {
     fetchData();
   }, []);
-  return loading ? (
-    <div className="loading">
-      <Image
-        src={"/loaderspinner.svg"}
-        alt="loading"
-        width={100}
-        height={100}
-      />
-    </div>
-  ) : (
+  return (
     <div className={styles.container}>
       <Subnav mediatype={"movies"} id={slug} />
-      <Link href={`/movies/${slug}`} className={styles.moviedetails}>
-        <Image
-          src={`https://www.themoviedb.org/t/p/original/${details.poster_path}`}
-          width={1000}
-          height={1000}
-          alt="image"
-        />
-        <div className={styles.subnav}>
-          <h1>
-            {details.title} ({new Date(details.release_date).getFullYear()})
-          </h1>
-          <p>&larr; Back to main.</p>
+      {loading ? (
+        <div className="loading">
+          <Image
+            src={"/loaderspinner.svg"}
+            alt="loading"
+            width={100}
+            height={100}
+          />
         </div>
-      </Link>
-
-      <div className={styles.mediacontainer}>
-        <div className={styles.mediafilter}>
-          <ul>
-            <li
-              onClick={() => {
-                setFilteredMedia(media.posters);
-                setmediatype("poster");
-              }}
-            >
-              Poster <span>({media.posters?.length})</span>
-            </li>
-            <li
-              onClick={() => {
-                setFilteredMedia(media.backdrops);
-                setmediatype("backdrop");
-              }}
-            >
-              Backdrop <span>({media.backdrops?.length})</span>
-            </li>
-            <li
-              onClick={() => {
-                setFilteredMedia(media.logos);
-                setmediatype("logo");
-              }}
-            >
-              Logos <span>({media.logos?.length})</span>
-            </li>
-            <li
-              onClick={() => {
-                setFilteredMedia(Videos);
-                setmediatype("video");
-              }}
-            >
-              Videos <span>({Videos?.length})</span>
-            </li>
-          </ul>
-        </div>
-        <div className={styles.images}>
-          {filteredMedia?.map((m, i) => (
-            <div
-              key={i}
-              className={
-                mediatype == "poster"
-                  ? styles.poster
-                  : mediatype == "backdrop"
-                  ? styles.backdrop
-                  : mediatype == "logo"
-                  ? styles.logo
-                  : styles.video
-              }
-            >
-              {mediatype == "video" ? (
-                <>
-                  <iframe
-                    src={`https://www.youtube.com/embed/${m.key}`}
-                    frameBorder="0"
-                    title="trailer player"
-                    allowFullScreen
-                  />
-                  <span>
-                    <p>
-                      {m.type} - {m.name}
-                    </p>
-                  </span>
-                </>
-              ) : (
-                <>
-                  <Link
-                    href={`https://www.themoviedb.org/t/p/original${m?.file_path}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Image
-                      src={`https://www.themoviedb.org/t/p/original${m?.file_path}`}
-                      width={1000}
-                      height={1000}
-                      alt="image"
-                    />
-                  </Link>
-                </>
-              )}
+      ) : (
+        <>
+          <Link href={`/movies/${slug}`} className={styles.moviedetails}>
+            <Image
+              src={`https://www.themoviedb.org/t/p/original/${details.poster_path}`}
+              width={1000}
+              height={1000}
+              alt="image"
+            />
+            <div className={styles.subnav}>
+              <h1>
+                {details.title} ({new Date(details.release_date).getFullYear()})
+              </h1>
+              <p>&larr; Back to main.</p>
             </div>
-          ))}
-        </div>
-      </div>
+          </Link>
+
+          <div className={styles.mediacontainer}>
+            <div className={styles.mediafilter}>
+              <ul>
+                <li
+                  onClick={() => {
+                    setFilteredMedia(media.posters);
+                    setmediatype("poster");
+                  }}
+                >
+                  Poster <span>({media.posters?.length})</span>
+                </li>
+                <li
+                  onClick={() => {
+                    setFilteredMedia(media.backdrops);
+                    setmediatype("backdrop");
+                  }}
+                >
+                  Backdrop <span>({media.backdrops?.length})</span>
+                </li>
+                <li
+                  onClick={() => {
+                    setFilteredMedia(media.logos);
+                    setmediatype("logo");
+                  }}
+                >
+                  Logos <span>({media.logos?.length})</span>
+                </li>
+                <li
+                  onClick={() => {
+                    setFilteredMedia(Videos);
+                    setmediatype("video");
+                  }}
+                >
+                  Videos <span>({Videos?.length})</span>
+                </li>
+              </ul>
+            </div>
+            <div className={styles.images}>
+              {filteredMedia?.map((m, i) => (
+                <div
+                  key={i}
+                  className={
+                    mediatype == "poster"
+                      ? styles.poster
+                      : mediatype == "backdrop"
+                      ? styles.backdrop
+                      : mediatype == "logo"
+                      ? styles.logo
+                      : styles.video
+                  }
+                >
+                  {mediatype == "video" ? (
+                    <>
+                      <iframe
+                        src={`https://www.youtube.com/embed/${m.key}`}
+                        frameBorder="0"
+                        title="trailer player"
+                        allowFullScreen
+                      />
+                      <span>
+                        <p>
+                          {m.type} - {m.name}
+                        </p>
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        href={`https://www.themoviedb.org/t/p/original${m?.file_path}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <Image
+                          src={`https://www.themoviedb.org/t/p/original${m?.file_path}`}
+                          width={1000}
+                          height={1000}
+                          alt="image"
+                        />
+                      </Link>
+                    </>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
