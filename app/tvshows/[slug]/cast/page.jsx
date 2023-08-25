@@ -41,7 +41,7 @@ https://api.themoviedb.org/3/tv/${slug}/credits?api_key=${process.env.NEXT_PUBLI
       <Subnav mediatype={"tvshows"} id={slug} />
       <Link href={`/tvshows/${slug}`} className={styles.moviedetails}>
         <Image
-          src={`https://www.themoviedb.org/t/p/original/${details.poster_path}`}
+          src={`https://www.themoviedb.org/t/p/original${details.poster_path}`}
           width={1000}
           height={1000}
           alt="image"
