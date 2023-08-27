@@ -35,7 +35,7 @@ const Navbar = () => {
         </Link>
       </ul>
       <div className={styles.icon}>
-        <Link href={"/"}>
+        <Link href={"/search"}>
           <BsSearch />
         </Link>
       </div>
