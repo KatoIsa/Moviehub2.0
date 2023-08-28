@@ -1,0 +1,43 @@
+.container {
+  margin-top: 74px;
+  h1 {
+    margin-left: 2.5%;
+  }
+  .subcontainer {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    margin: 10px auto;
+    .filters {
+      width: 20%;
+    }
+    .themovies {
+      width: 80%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    h1 {
+      margin-left: 1%;
+    }
+    .subcontainer {
+      flex-direction: column;
+      width: 98%;
+      margin: 10px auto;
+      .filters {
+        width: 100%;
+      }
+      .themovies {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 15px;
+      }
+    }
+  }
+}
