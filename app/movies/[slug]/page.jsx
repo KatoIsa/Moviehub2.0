@@ -22,8 +22,9 @@ const Page = ({ params: { slug } }) => {
     );
     setdetails(data);
 
-    const cast = await axios.get(`
-https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}`);
+    const cast = await axios.get(
+      `https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}`
+    );
     const writersndirectors = cast.data?.crew.filter(
       (item) =>
         item.known_for_department == "Writing" ||
