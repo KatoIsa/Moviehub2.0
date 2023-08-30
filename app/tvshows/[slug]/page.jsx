@@ -77,7 +77,11 @@ https://api.themoviedb.org/3/tv/${slug}/credits?api_key=${process.env.NEXT_PUBLI
           className={styles.image}
         >
           <Image
-            src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${details.poster_path}`}
+            src={
+              details.poster_path
+                ? `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${details.poster_path}`
+                : "/placeholderImage.png"
+            }
             width={1000}
             height={1000}
             alt="image"
@@ -85,7 +89,11 @@ https://api.themoviedb.org/3/tv/${slug}/credits?api_key=${process.env.NEXT_PUBLI
         </Link>
         <div className={styles.mobilegradient}>
           <Image
-            src={`https://www.themoviedb.org/t/p/original${details.backdrop_path}`}
+            src={
+              details.backdrop_path
+                ? `https://www.themoviedb.org/t/p/original${details.backdrop_path}`
+                : "/placeholderImage.png"
+            }
             width={1000}
             height={1000}
             className={styles.background}

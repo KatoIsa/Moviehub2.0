@@ -80,14 +80,17 @@
       }
       .result {
         display: flex;
+        overflow: hidden;
         margin-bottom: 25px;
         background-color: #fff;
         border: 0.5px solid #cccc;
         box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        border-radius: 10px;
+        border-radius: 5px;
         img {
           width: 94px;
           height: 141px;
+          object-fit: cover;
+          background-color: #cccc;
         }
         div {
           padding: 0 15px;
@@ -114,19 +117,25 @@
     }
     .subcontainer {
       flex-direction: column;
-      padding: 10px;
+      padding: 0 0 10px;
       .filters {
         width: 100%;
+        border-radius: 0;
+        h1 {
+          padding: 10px 5px;
+        }
         ul {
           display: flex;
           align-items: center;
           justify-content: space-between;
           li {
             display: flex;
-            // align-items: center;
             justify-content: center;
+            margin: 10px;
+            font-size: 14px;
             span {
-              font-size: 14px;
+              margin-left: 2px;
+              padding: 1px 5px;
             }
           }
         }
@@ -134,6 +143,24 @@
       .results {
         margin-top: 15px;
         margin-left: 0;
+        padding: 0 10px;
+        .person {
+          margin-bottom: 10px;
+          img {
+            width: 60px;
+            height: 60px;
+          }
+        }
+        h3 {
+          font-size: 16px;
+        }
+        span {
+          margin-top: 2px;
+        }
+        p {
+          font-size: 14px;
+          margin-top: 0;
+        }
       }
     }
   }

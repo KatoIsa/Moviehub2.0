@@ -47,7 +47,11 @@ const Page = ({ params: { slug } }) => {
       </div>
       <Link href={`/people/${slug}`} className={styles.moviedetails}>
         <Image
-          src={`https://www.themoviedb.org/t/p/original${details?.profile_path}`}
+          src={
+            details.profile_path
+              ? `https://www.themoviedb.org/t/p/original${details?.profile_path}`
+              : "/placeholder.png"
+          }
           width={1000}
           height={1000}
           alt="image"
@@ -73,7 +77,11 @@ const Page = ({ params: { slug } }) => {
               key={i}
             >
               <Image
-                src={`https://www.themoviedb.org/t/p/original${image?.file_path}`}
+                src={
+                  image.file_path
+                    ? `https://www.themoviedb.org/t/p/original${image?.file_path}`
+                    : "/placeholderImage.png"
+                }
                 alt="images"
                 width={1000}
                 height={1000}

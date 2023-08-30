@@ -138,7 +138,11 @@ const MovieResults = ({ setPage, movies }) => {
         {movies.results.map((m, i) => (
           <Link href={`/movies/${m.id}`} key={m.id} className={styles.result}>
             <Image
-              src={`https://www.themoviedb.org/t/p/w94_and_h141_bestv2${m.poster_path}`}
+              src={
+                m?.poster_path
+                  ? `https://www.themoviedb.org/t/p/w94_and_h141_bestv2${m.poster_path}`
+                  : "/placeholderImage.png"
+              }
               alt={m.original_title}
               width={1000}
               height={1000}
@@ -167,7 +171,11 @@ const TvResults = ({ setPage, tv }) => {
       {tv.results.map((m, i) => (
         <Link href={`/tvshows/${m.id}`} key={m.id} className={styles.result}>
           <Image
-            src={`https://www.themoviedb.org/t/p/w94_and_h141_bestv2${m.poster_path}`}
+            src={
+              m?.poster_path
+                ? `https://www.themoviedb.org/t/p/w94_and_h141_bestv2${m.poster_path}`
+                : "/placeholderImage.png"
+            }
             alt={m.original_name}
             width={1000}
             height={1000}

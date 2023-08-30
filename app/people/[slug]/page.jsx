@@ -151,7 +151,11 @@ const Page = ({ params: { slug } }) => {
                       className={styles.credit}
                     >
                       <Image
-                        src={`https://www.themoviedb.org/t/p/w150_and_h225_bestv2${c?.poster_path}`}
+                        src={
+                          c.poster_path
+                            ? `https://www.themoviedb.org/t/p/w150_and_h225_bestv2${c?.poster_path}`
+                            : "/placeholderImage.png"
+                        }
                         alt="image"
                         width={150}
                         height={225}
