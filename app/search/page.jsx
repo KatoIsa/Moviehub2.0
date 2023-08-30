@@ -109,8 +109,6 @@ const Page = () => {
   );
 };
 
-export default Page;
-
 const FilteredResults = ({
   filter,
   setPagemovie,
@@ -225,3 +223,5 @@ const PeopleResults = ({ setPage, people }) => {
     </div>
   );
 };
+
+export default Page;
