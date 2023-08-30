@@ -199,7 +199,7 @@ const PeopleResults = ({ setPage, people }) => {
   return (
     <div className={styles.themovies}>
       {people?.results.map((p, _i) => (
-        <Link href={`/people/${p.id}`} className={styles.person}>
+        <Link href={`/people/${p.id}`} key={p.id} className={styles.person}>
           <Image
             src={
               p.profile_path
