@@ -41,6 +41,9 @@ const Page = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setPagemovie(1);
+    setPagepeople(1);
+    setPagetv(1);
     getResults();
   };
   useEffect(() => {
@@ -63,8 +66,8 @@ const Page = () => {
 
       <div className={styles.subcontainer}>
         <div className={styles.filters}>
+          <h1>Search Results</h1>
           <ul>
-            <h1>Search Results</h1>
             <li onClick={() => setfilter("movie")}>
               Movies <span>{movieResults?.total_results}</span>
             </li>
