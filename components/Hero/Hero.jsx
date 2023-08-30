@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import styles from "./Hero.module.scss";
 import axios from "axios";
+import Link from "next/link";
 
 const Hero = () => {
   const [movies, setmovies] = useState([]);
@@ -29,13 +30,15 @@ const Hero = () => {
         <h2>
           Millions of movies, TV shows and people to discover. Explore now.
         </h2>
-        <form action="">
-          <input
-            type="text"
-            placeholder="search for a movie, tv show, person..."
-          />
-          <button type="submit">search</button>
-        </form>
+        <Link href={"/search"}>
+          <form action="">
+            <input
+              type="text"
+              placeholder="search for a movie, tv show, person..."
+            />
+            <button type="submit">search</button>
+          </form>
+        </Link>
       </div>
     </section>
   );
