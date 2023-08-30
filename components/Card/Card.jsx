@@ -11,7 +11,11 @@ const Card = ({ item, type }) => {
     >
       <div className={styles.image}>
         <Image
-          src={`https://www.themoviedb.org/t/p/w220_and_h330_face${item.poster_path}`}
+          src={
+            item.poster_path
+              ? `https://www.themoviedb.org/t/p/w220_and_h330_face${item.poster_path}`
+              : "/placeholderImage.png"
+          }
           alt="img"
           width={1000}
           height={1000}
