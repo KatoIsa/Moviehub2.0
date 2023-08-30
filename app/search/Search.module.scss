@@ -1,6 +1,6 @@
 .container {
   margin-top: 64px;
-  min-height: 90vh;
+  min-height: 100vh;
   form {
     width: 100%;
     display: flex;
@@ -40,14 +40,14 @@
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
       border-radius: 10px;
       overflow: hidden;
+      h1 {
+        font-size: 18px;
+        background-color: rgba(var(--accountLightBlue));
+        padding: 20px 10px;
+        color: #fff;
+      }
       ul {
         list-style: none;
-        h1 {
-          font-size: 18px;
-          background-color: rgba(var(--accountLightBlue));
-          padding: 20px 10px;
-          color: #fff;
-        }
         li {
           display: flex;
           margin: 18px 10px;
@@ -102,6 +102,38 @@
             margin-top: 15px;
           }
         }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    form {
+      padding: 10px;
+    }
+    .subcontainer {
+      flex-direction: column;
+      padding: 10px;
+      .filters {
+        width: 100%;
+        ul {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          li {
+            display: flex;
+            // align-items: center;
+            justify-content: center;
+            span {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+      .results {
+        margin-top: 15px;
+        margin-left: 0;
       }
     }
   }
