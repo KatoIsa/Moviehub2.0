@@ -24,7 +24,6 @@ const Iframe = ({ open, movieid, handleclose, type }) => {
         }`}
         width="500"
         height="300"
-        frameBorder="0"
         title="trailer player"
         allowFullScreen
       />
