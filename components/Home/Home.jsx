@@ -1,6 +1,7 @@
 import styles from "./Home.module.scss";
 import Card from "../Card/Card";
 import { BsArrowRight } from "react-icons/bs";
+import Link from "next/link";
 
 const Homepage = ({ title, movies, tv }) => {
   return (
@@ -8,7 +9,10 @@ const Homepage = ({ title, movies, tv }) => {
       <div className={styles.div}>
         <h1>{title}</h1>
         <h2>
-          Movies <BsArrowRight />
+          Movies{" "}
+          <Link href="/movies">
+            <BsArrowRight />
+          </Link>
         </h2>
         <div className={styles.movies}>
           {movies.map((item, i) => (
@@ -16,7 +20,10 @@ const Homepage = ({ title, movies, tv }) => {
           ))}
         </div>
         <h2>
-          Tv Shows <BsArrowRight />
+          Tv Shows{" "}
+          <Link href="/tvshows">
+            <BsArrowRight />
+          </Link>
         </h2>
         <div className={styles.tv}>
           {tv.map((item, i) => (
