@@ -9,8 +9,7 @@ import Subnav from "@/components/subnav/Subnav";
 const Page = ({ params: { slug } }) => {
   const [media, setmedia] = useState([]);
   const [details, setdetails] = useState([]);
-  const [filteredMedia, setFilteredMedia] = useState([]);
-  const [mediatype, setmediatype] = useState();
+  const [mediatype, setmediatype] = useState("poster");
   const [Videos, setvideos] = useState([]);
   const [loading, setloading] = useState(true);
 
@@ -69,7 +68,6 @@ const Page = ({ params: { slug } }) => {
           <ul>
             <li
               onClick={() => {
-                setFilteredMedia(media.posters);
                 setmediatype("poster");
               }}
             >
@@ -77,7 +75,6 @@ const Page = ({ params: { slug } }) => {
             </li>
             <li
               onClick={() => {
-                setFilteredMedia(media.backdrops);
                 setmediatype("backdrop");
               }}
             >
@@ -85,7 +82,6 @@ const Page = ({ params: { slug } }) => {
             </li>
             <li
               onClick={() => {
-                setFilteredMedia(media.logos);
                 setmediatype("logo");
               }}
             >
@@ -93,7 +89,6 @@ const Page = ({ params: { slug } }) => {
             </li>
             <li
               onClick={() => {
-                setFilteredMedia(Videos);
                 setmediatype("video");
               }}
             >
@@ -101,58 +96,120 @@ const Page = ({ params: { slug } }) => {
             </li>
           </ul>
         </div>
-        <div className={styles.images}>
-          {filteredMedia?.map((m, i) => (
-            <div
-              key={i}
-              className={
-                mediatype == "poster"
-                  ? styles.poster
-                  : mediatype == "backdrop"
-                  ? styles.backdrop
-                  : mediatype == "logo"
-                  ? styles.logo
-                  : styles.video
-              }
-            >
-              {mediatype == "video" ? (
-                <>
-                  <iframe
-                    src={`https://www.youtube.com/embed/${m.key}`}
-                    frameBorder="0"
-                    title="trailer player"
-                    allowFullScreen
-                  />
-                  <span>
-                    <p>
-                      {m.type} - {m.name}
-                    </p>
-                  </span>
-                </>
-              ) : (
-                <>
-                  <Link
-                    href={`https://www.themoviedb.org/t/p/original${m?.file_path}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Image
-                      src={
-                        m.file_path
-                          ? `https://www.themoviedb.org/t/p/original${m?.file_path}`
-                          : "/placeholderImage.png"
-                      }
-                      width={1000}
-                      height={1000}
-                      alt="image"
-                    />
-                  </Link>
-                </>
-              )}
-            </div>
-          ))}
-        </div>
+
+        {mediatype == "poster" ? (
+          <Posters media={media} />
+        ) : mediatype == "backdrop" ? (
+          <Backdrops media={media} />
+        ) : mediatype == "logo" ? (
+          <Logos media={media} />
+        ) : (
+          <Thevideos Videos={Videos} />
+        )}
       </div>
+    </div>
+  );
+};
+
+const Posters = ({ media }) => {
+  return (
+    <div className={styles.images}>
+      {media?.posters?.map((m, i) => (
+        <div key={i} className={styles.poster}>
+          <Link
+            href={`https://www.themoviedb.org/t/p/original${m?.file_path}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Image
+              src={
+                m.file_path
+                  ? `https://www.themoviedb.org/t/p/original${m?.file_path}`
+                  : "/placeholderImage.png"
+              }
+              width={1000}
+              height={1000}
+              alt="image"
+            />
+          </Link>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const Backdrops = ({ media }) => {
+  return (
+    <div className={styles.images}>
+      {media?.backdrops?.map((m, i) => (
+        <div key={i} className={styles.backdrop}>
+          <Link
+            href={`https://www.themoviedb.org/t/p/original${m?.file_path}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Image
+              src={
+                m.file_path
+                  ? `https://www.themoviedb.org/t/p/original${m?.file_path}`
+                  : "/placeholderImage.png"
+              }
+              width={1000}
+              height={1000}
+              alt="image"
+            />
+          </Link>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const Logos = ({ media }) => {
+  return (
+    <div className={styles.images}>
+      {media?.logos?.map((m, i) => (
+        <div key={i} className={styles.logo}>
+          <Link
+            href={`https://www.themoviedb.org/t/p/original${m?.file_path}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Image
+              src={
+                m.file_path
+                  ? `https://www.themoviedb.org/t/p/original${m?.file_path}`
+                  : "/placeholderImage.png"
+              }
+              width={1000}
+              height={1000}
+              alt="image"
+            />
+          </Link>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const Thevideos = ({ Videos }) => {
+  return (
+    <div className={styles.images}>
+      {Videos?.map((m, i) => (
+        <div key={i} className={styles.video}>
+          <iframe
+            src={`https://www.youtube.com/embed/${m.key}`}
+            frameBorder="0"
+            title="trailer player"
+            allowFullScreen
+          />
+          <span>
+            <p>
+              {m.type} - {m.name}
+            </p>
+          </span>
+        </div>
+      ))}
     </div>
   );
 };
