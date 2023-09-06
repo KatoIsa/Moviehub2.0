@@ -27,9 +27,11 @@ const Hero = () => {
     >
       <div className={styles.txt}>
         <h1>Welcome.</h1>
-        <h2>
-          Millions of movies, TV shows and people to discover. Explore now.
-        </h2>
+        <strong>
+          <h2>
+            Millions of movies, TV shows and people to discover. Explore now.
+          </h2>
+        </strong>
         <Link href={"/search"}>
           <form action="">
             <input

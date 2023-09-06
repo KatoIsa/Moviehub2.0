@@ -23,6 +23,7 @@ const Iframe = ({ open, movieid, handleclose, type }) => {
           trailer?.key || trailers[0]?.key
         }`}
         width="500"
+        frameBorder={0}
         height="300"
         title="trailer player"
         allowFullScreen
