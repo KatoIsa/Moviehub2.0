@@ -37,6 +37,26 @@
         border-radius: 20px;
       }
     }
+    .scroll {
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+      p {
+        margin-right: 5px;
+        animation: scroll 1s infinite forwards;
+      }
+    }
+    @keyframes scroll {
+      0% {
+        margin-right: 5px;
+      }
+      50% {
+        margin-right: 10px;
+      }
+      100% {
+        margin-right: 5px;
+      }
+    }
   }
 }
 
