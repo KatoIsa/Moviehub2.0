@@ -13,9 +13,10 @@ const Homepage = ({ title, movies, tv }) => {
         <strong>
           <h2>
             Movies{" "}
-            <Link href="/movies">
+            <span className={styles.scroll}>
+              <p>scroll</p>
               <BsArrowRight />
-            </Link>
+            </span>
           </h2>
         </strong>
         <div className={styles.movies}>
@@ -26,9 +27,10 @@ const Homepage = ({ title, movies, tv }) => {
         <strong>
           <h2>
             Tv Shows{" "}
-            <Link href="/tvshows">
+            <span className={styles.scroll}>
+              <p>scroll</p>
               <BsArrowRight />
-            </Link>
+            </span>
           </h2>
         </strong>
         <div className={styles.tv}>

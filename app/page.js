@@ -75,7 +75,7 @@ export default function Home() {
       <Hero />
       <Homepage title={"Trending"} movies={movies} tv={tv} />
       <LatestTrailers handleopen={handleopen} />
-      <Homepage title={"What's popular"} movies={topmovies} tv={toptv} />
+      <Homepage title={"All time popular"} movies={topmovies} tv={toptv} />
     </main>
   );
 }
