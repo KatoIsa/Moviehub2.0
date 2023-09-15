@@ -12,10 +12,9 @@ const Page = () => {
   const [loading, setloading] = useState(true);
   const fetchData = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&page=${page}`
+      `https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&page=${page}`
     );
     setThemovies(data);
-    console.log(themovies?.results);
     setloading(false);
   };
   useEffect(() => {
