@@ -65,7 +65,7 @@ const Page = () => {
             <h4>filters</h4>
             <div className={styles.thefilters}>
               <section>
-                <p>Release Year</p>
+                <p>First air year</p>
                 <input
                   type="number"
                   name="year"
