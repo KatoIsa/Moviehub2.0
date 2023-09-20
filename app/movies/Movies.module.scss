@@ -10,6 +10,46 @@
     margin: 10px auto;
     .filters {
       width: 20%;
+      margin-right: 10px;
+      .sort,
+      .filter {
+        border: 1px solid #cccc;
+        padding: 10px 10px;
+        margin-bottom: 15px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+      }
+      .sort {
+        select {
+          margin: 10px 0;
+          width: 100%;
+          border: none;
+          background-color: #b1b1b1cc;
+          padding: 6px 15px;
+          border-radius: 4px;
+          outline: none;
+          option {
+            background-color: #fff;
+          }
+        }
+      }
+      .filter {
+        .thefilters {
+          section {
+            margin: 10px 0;
+            input {
+              width: 100%;
+              padding: 10px;
+              border: 1px solid #cccc;
+              border-radius: 5px;
+              outline: none;
+            }
+            p {
+              margin: 5px 0;
+            }
+          }
+        }
+      }
     }
     .themovies {
       width: 80%;
