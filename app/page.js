@@ -9,43 +9,62 @@ import Iframe from "@/components/Iframe/Iframe";
 import Image from "next/image";
 
 export default function Home() {
-  const [movies, setmovies] = useState([]);
-  const [tv, settv] = useState([]);
-  const [topmovies, settopmovies] = useState([]);
-  const [toptv, settoptv] = useState([]);
+  // created one state and added the most of the states into an object
+  const [allmovies, setAllmovies] = useState({
+    movies: [],
+    tv: [],
+    topmovies: [],
+    toptv: [],
+    randompage: Math.floor(Math.random() * 10 + 1),
+    loading: true
+  })
   const [movieid, setmovieid] = useState(0);
   const [open, setopen] = useState(false);
-  const [randompage, setrandompage] = useState(
-    Math.floor(Math.random() * 10 + 1)
-  );
-  const [loading, setloading] = useState(true);
 
   const fetchTrending = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&page=1`
     );
 
-    setmovies(data.results);
+    setAllmovies(setmovies => {
+      return {...setmovies, movies:data.results}
+    });
 
     const data2 = await axios.get(
       `https://api.themoviedb.org/3/trending/tv/day?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&page=1`
     );
-    settv(data2.data.results);
+
+    setAllmovies(settv => {
+      return {...settv, tv:data2.data.results}
+    })
 
     const data3 = await axios.get(
-      `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&page=${randompage}`
+      `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&page=${allmovies.randompage}`
     );
-    settopmovies(data3.data.results);
+
+    setAllmovies(settopmovies => {
+      return {...settopmovies, topmovies:data3.data.results}
+    })
+
     const data4 = await axios.get(
-      `https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&page=${randompage}`
+      `https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.NEXT_PUBLIC_THEMOVIEDB_API_KEY}&page=${allmovies.randompage}`
     );
-    settoptv(data4.data.results);
-    setloading(false);
+
+    setAllmovies(settoptv =>{
+      return {...settoptv, toptv:data4.data.results}
+    })
+    
+    setAllmovies(setloading => {
+      return {...setloading, loading:false}
+    })
+
   };
+  
   const handleopen = (m) => {
     setmovieid(m.id);
     setopen(true);
   };
+
   const handleclose = () => {
     setopen(false);
   };
@@ -53,7 +72,8 @@ export default function Home() {
   useEffect(() => {
     fetchTrending();
   }, []);
-  return loading ? (
+
+  return allmovies.loading ? (
     <div className="loading">
       <Image
         src={"/loaderspinner.svg"}
@@ -73,9 +93,9 @@ export default function Home() {
         />
       )}
       <Hero />
-      <Homepage title={"Trending"} movies={movies} tv={tv} />
+      <Homepage title={"Trending"} movies={allmovies.movies} tv={tv} />
       <LatestTrailers handleopen={handleopen} />
-      <Homepage title={"All time popular"} movies={topmovies} tv={toptv} />
+      <Homepage title={"All time popular"} movies={allmovies.topmovies} tv={allmovies.toptv} />
     </main>
   );
 }
