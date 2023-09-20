@@ -18,6 +18,7 @@ export default function Home() {
     randompage: Math.floor(Math.random() * 10 + 1),
     loading: true
   })
+  // ....
   const [movieid, setmovieid] = useState(0);
   const [open, setopen] = useState(false);
 
